@@ -15,6 +15,7 @@ function Root() {
       color="blackAlpha.700"
       fontWeight="bold"
       height={"100vh"}
+      overflowY={"hidden"}
     >
       <GridItem pl="2" bg={AppColors.primary} area={"header"}>
         <Header />
