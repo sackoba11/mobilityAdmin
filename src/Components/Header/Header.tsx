@@ -10,16 +10,15 @@ const StyleHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   color: ${AppColors.white};
-  font-size: 30px;
-  margin-right: 15px;
+  font-size: 18px;
 `;
 
 const StyledLogo = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 15px;
-  height: 50px;
-  width: 400px;
+  margin-top: 10px;
+  height: 40px;
+  width: 300px;
   align-items: center;
   justify-content: space-evenly;
 `;
@@ -29,14 +28,15 @@ const Header = () => {
     <StyleHeader>
       <StyledLogo>
         <Image src={darkLogo} alt="Logo" />
-        <h1>Mobility Dashboard</h1>
+        <span>Mobility Dashboard</span>
       </StyledLogo>
       <StyledLogo>
-        <MdNotifications size={25} />
+        <MdNotifications size={20} />
         <Button
-          leftIcon={<MdLogout size={25} />}
+          leftIcon={<MdLogout size={18} />}
           bg={AppColors.white}
           variant="solid"
+          fontSize={13}
           onClick={() => {
             alert("Se Déconnecter");
           }}

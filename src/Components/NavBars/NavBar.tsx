@@ -2,26 +2,24 @@ import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import AppColors from "../../Common/Theme/Colors";
 import { IoMdBus } from "react-icons/io";
-import { Stack } from "@chakra-ui/react";
 import { MdHome } from "react-icons/md";
 import { BiStopCircle, BiUser } from "react-icons/bi";
 import { GiSteeringWheel } from "react-icons/gi";
 import { useState } from "react";
 
-const HeaderStyled = styled.nav`
-  display: flex;
+const HeaderStyled = styled.div`
+  /* display: flex; */
   flex-direction: column;
-  padding: 50px 0px;
-  justify-content: space-between;
   color: ${AppColors.white};
-  font-size: 31px;
+  font-size: 25px;
 `;
 
 const StyledItem = styled(Link)`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 5px 50px;
+  padding: 0px 50px;
+  margin-top: 30px;
   border-radius: 0px 100px 100px 0px;
 `;
 
@@ -29,7 +27,6 @@ function NavBar() {
   const [index, setIndex] = useState(0);
   return (
     <HeaderStyled>
-      <Stack direction={"column"} spacing={70}>
         <StyledItem
           to="/"
           onClick={() => setIndex(0)}
@@ -78,7 +75,7 @@ function NavBar() {
           <BiUser style={{ marginRight: "25px" }} />
           Users
         </StyledItem>
-      </Stack>
+     
     </HeaderStyled>
   );
 }

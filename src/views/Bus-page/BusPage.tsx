@@ -25,21 +25,22 @@ const StyledHead = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-evenly;
   justify-content: space-between;
-  padding: 20px;
+  padding: 5px;
   width: 100%;
-  font-size: 31px;
+  font-size: 25px;
   color: ${AppColors.primary};
 `;
 
 const StyledTable = styled.div`
   width: 100%;
-  padding: 25px;
+  padding: 15px;
   background-color: ${AppColors.white};
   overflow-y: scroll;
   height: 80vh;
   border: 1px solid ${AppColors.gray};
-  border-radius: 15px;
+  border-radius: 10px;
 `;
 
 type Bus = {
@@ -65,15 +66,14 @@ const BusPage = () => {
   }
 
   return (
-    <>
       <StylesAppContent>
         <StyledHead>
-          <h1>Bus</h1>
+          <span>Bus</span>
           <Button
-            leftIcon={<AddIcon fontSize={20} color={AppColors.white} />}
+            leftIcon={<AddIcon fontSize={15} color={AppColors.white} />}
             bg={AppColors.primary}
             color={AppColors.white}
-            fontSize={20}
+            fontSize={18}
             variant="solid"
             onClick={() => alert("Ajouter")}
           >
@@ -83,12 +83,12 @@ const BusPage = () => {
         <StyledTable>
           <TableContainer>
             <Table variant="striped" size="sm">
-              <Thead>
+              <Thead >
                 <Tr>
                   <Th
                     style={{
                       fontWeight: "bold",
-                      fontSize: "20px",
+                      fontSize: "18px",
                       paddingBottom: "15px",
                     }}
                   >
@@ -97,25 +97,25 @@ const BusPage = () => {
                   <Th
                     style={{
                       fontWeight: "bold",
-                      fontSize: "20px",
+                      fontSize: "18px",
                       paddingBottom: "15px",
                     }}
                   >
                     Numéro
                   </Th>
-                  <Td
+                  <Th
                     style={{
                       fontWeight: "bold",
-                      fontSize: "20px",
+                      fontSize: "18px",
                       paddingBottom: "15px",
                     }}
                   >
                     Source
-                  </Td>
+                  </Th>
                   <Th
                     style={{
                       fontWeight: "bold",
-                      fontSize: "20px",
+                      fontSize: "18px",
                       paddingBottom: "15px",
                     }}
                   >
@@ -124,7 +124,7 @@ const BusPage = () => {
                   <Th
                     style={{
                       fontWeight: "bold",
-                      fontSize: "20px",
+                      fontSize: "18px",
                       paddingBottom: "15px",
                     }}
                   >
@@ -133,7 +133,7 @@ const BusPage = () => {
                   <Th
                     style={{
                       fontWeight: "bold",
-                      fontSize: "20px",
+                      fontSize: "18px",
                       paddingBottom: "15px",
                     }}
                   >
@@ -142,7 +142,7 @@ const BusPage = () => {
                   <Th
                     style={{
                       fontWeight: "bold",
-                      fontSize: "20px",
+                      fontSize: "18px",
                       paddingBottom: "15px",
                     }}
                   >
@@ -189,7 +189,6 @@ const BusPage = () => {
           </TableContainer>
         </StyledTable>
       </StylesAppContent>
-    </>
   );
 };
 
