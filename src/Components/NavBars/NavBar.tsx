@@ -25,6 +25,7 @@ const StyledItem = styled(Link)`
 
 function NavBar() {
   const [index, setIndex] = useState(0);
+  
   return (
     <HeaderStyled>
         <StyledItem
@@ -73,7 +74,7 @@ function NavBar() {
         >
           {" "}
           <BiUser style={{ marginRight: "25px" }} />
-          Users
+          Utilisateurs
         </StyledItem>
      
     </HeaderStyled>
