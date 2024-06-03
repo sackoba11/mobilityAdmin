@@ -3,6 +3,8 @@ import styled from "styled-components";
 import AppColors from "../../Common/Theme/Colors";
 
 const StyledTh = styled.th`
+  align-items: center;
+  align-content: center;
   font-weight: 700;
   font-size: 18px;
   padding-bottom: 15px;
@@ -10,14 +12,15 @@ const StyledTh = styled.th`
 `;
 
 type TableHeaderText = {
-     label: string
-     };
+  label: string;
+};
 
-     type TableList={
-        title: TableHeaderText[]
-     }
+type TableList = {
+  title: TableHeaderText[];
+};
 
-export const TableHeaderContent = ({ title}: TableList) => {
+export const TableHeaderContent = ({ title }: TableList) => {
+    
   return (
     <Thead>
       <Tr>
@@ -25,6 +28,7 @@ export const TableHeaderContent = ({ title}: TableList) => {
           <StyledTh key={index}>{label.label}</StyledTh>
         ))}
       </Tr>
+
     </Thead>
   );
 };

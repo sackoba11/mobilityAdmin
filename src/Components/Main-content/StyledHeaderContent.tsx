@@ -17,8 +17,9 @@ const StyledHead = styled.div`
 
 type Title={
     page:string
+    onPressed:()=>void
 }
-export const StyledHeaderContent  =({page}:Title) =>{
+export const StyledHeaderContent  =({page, onPressed}:Title) =>{
   return (
     <StyledHead>
       <span>{page}</span>
@@ -28,7 +29,7 @@ export const StyledHeaderContent  =({page}:Title) =>{
         color={AppColors.white}
         fontSize={18}
         variant="solid"
-        onClick={() => alert("Ajouter")}
+        onClick={() => onPressed()}
       >
         Ajouter
       </Button>

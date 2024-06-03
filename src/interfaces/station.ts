@@ -24,7 +24,5 @@ export const TableHeaderStation = [
     label: "Localisation",
   },
 
-  {
-    label: "Actions",
-  },
+  
 ];

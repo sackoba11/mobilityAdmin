@@ -14,8 +14,6 @@ export type AllUsers = {
     {
         label: "Email",
     },
-    {
-        label: "Actions",
-    },
+    
   ];
   

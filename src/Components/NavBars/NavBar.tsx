@@ -1,20 +1,17 @@
 import { styled } from "styled-components";
-import { Link } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 import AppColors from "../../Common/Theme/Colors";
 import { IoMdBus } from "react-icons/io";
 import { MdHome } from "react-icons/md";
 import { BiStopCircle, BiUser } from "react-icons/bi";
 import { GiSteeringWheel } from "react-icons/gi";
-import { useState } from "react";
 
 const HeaderStyled = styled.div`
-  /* display: flex; */
-  flex-direction: column;
   color: ${AppColors.white};
   font-size: 25px;
 `;
 
-const StyledItem = styled(Link)`
+const StyledItem = styled(NavLink)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,59 +21,68 @@ const StyledItem = styled(Link)`
 `;
 
 function NavBar() {
-  const [index, setIndex] = useState(0);
-  
+
   return (
     <HeaderStyled>
-        <StyledItem
-          to="/"
-          onClick={() => setIndex(0)}
-          style={
-            index == 0
-              ? { backgroundColor: AppColors.gray }
-              : { backgroundColor: "transparent" }
-          }
-        >
-          <MdHome style={{ marginRight: "25px" }} />
-          Accueil
-        </StyledItem>
-        <StyledItem
-          to="/bus"
-          onClick={() => setIndex(1)}
-          style={index == 1 ? { backgroundColor: AppColors.gray } : {}}
-        >
-          {" "}
-          <IoMdBus style={{ marginRight: "25px" }} /> Bus
-        </StyledItem>
+      <StyledItem
+        to="/"
+        style={({ isActive }) =>
+          isActive
+            ? { backgroundColor: AppColors.gray }
+            : { }
+        }
+      >
+        <MdHome style={{ marginRight: "25px" }} />
+        Accueil
+      </StyledItem>
+      <StyledItem
+        to="/bus"
+        style={({ isActive }) =>
+          isActive
+            ? { backgroundColor: AppColors.gray }
+            : {}
+        }
+      >
+        {" "}
+        <IoMdBus style={{ marginRight: "25px" }} /> Bus
+      </StyledItem>
 
-        <StyledItem
-          to="/drivers"
-          onClick={() => setIndex(2)}
-          style={index == 2 ? { backgroundColor: AppColors.gray } : {}}
-        >
-          {" "}
-          <GiSteeringWheel style={{ marginRight: "25px" }} />
-          Conducteurs
-        </StyledItem>
-        <StyledItem
-          to="/gares"
-          onClick={() => setIndex(3)}
-          style={index == 3 ? { backgroundColor: AppColors.gray } : {}}
-        >
-          {" "}
-          <BiStopCircle style={{ marginRight: "25px" }} />
-          Gares
-        </StyledItem>
-        <StyledItem
-          to="/users"
-          onClick={() => setIndex(4)}
-          style={index == 4 ? { backgroundColor: AppColors.gray } : {}}
-        >
-          {" "}
-          <BiUser style={{ marginRight: "25px" }} />
-          Utilisateurs
-        </StyledItem>
-     
+      <StyledItem
+        to="/drivers"
+        style={({ isActive }) =>
+          isActive
+            ? { backgroundColor: AppColors.gray }
+            : {}
+        }
+      >
+        {" "}
+        <GiSteeringWheel style={{ marginRight: "25px" }} />
+        Conducteurs
+      </StyledItem>
+      <StyledItem
+        to="/gares"
+        style={({ isActive }) =>
+          isActive
+            ? { backgroundColor: AppColors.gray }
+            : {}
+        }
+      >
+        {" "}
+        <BiStopCircle style={{ marginRight: "25px" }} />
+        Gares
+      </StyledItem>
+      <StyledItem
+        to="/users"
+        style={({ isActive }) =>
+          isActive
+            ? { backgroundColor: AppColors.gray }
+            : {}
+        }
+      >
+        {" "}
+        <BiUser style={{ marginRight: "25px" }} />
+        Utilisateurs
+      </StyledItem>
     </HeaderStyled>
   );
 }

@@ -27,10 +27,6 @@ export const tableHeaderBus:TableHeaderBus[] = [
   {
     label: "Itineraire",
   },
-  {
-    label: "Statut",
-  },
-  {
-    label: "Actions",
-  },
+  
+
 ];

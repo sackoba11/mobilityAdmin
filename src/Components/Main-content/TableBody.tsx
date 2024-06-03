@@ -1,23 +1,29 @@
-import { Tbody, } from "@chakra-ui/react"
-import { TableHeaderBus } from "../../interfaces/Bus"
-import { TableRow } from "./TableRow"
+import { Tbody } from "@chakra-ui/react";
+import { TableHeaderBus } from "../../interfaces/Bus";
+import { TableRow } from "./TableRow";
+import { TableRowImput } from "./TableRowImput";
 
-type DataList={
-    dataTitle:TableHeaderBus[],
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data:any
-}
+type DataList = {
+  dataTitle: TableHeaderBus[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
+  editImput:()=>void
+  editable:boolean
+};
 
-
-
-export const TableBody=({data,dataTitle}:DataList)=>{
-    console.log(dataTitle[5])
-    return( 
-        <Tbody>
-              
-              {data.map((dataItem: any, index: number) => (
-                <TableRow data={dataItem} dataTitle={dataTitle} index={index}/>
-                
-              ))}
-            </Tbody>)
-}
+export const TableBody = ({ data, dataTitle, editImput, editable}: DataList) => {
+    
+  return (
+    <Tbody>
+      {data.map((dataItem: never, index: number) => (
+        <TableRow
+          key={index}
+          data={dataItem}
+          dataTitle={dataTitle}
+          index={index}
+        />
+      ))}
+    { editable? <TableRowImput editImput={editImput} dataTitle={dataTitle}/>:null}
+    </Tbody>
+  );
+};

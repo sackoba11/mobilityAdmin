@@ -5,6 +5,7 @@ import { StyledTable, StylesAppContent } from "../../Components/Main-content/Sty
 import { StyledHeaderContent } from "../../Components/Main-content/StyledHeaderContent";
 import { TableHeaderContent } from "../../Components/Main-content/TableHeader";
 import { TableBody } from "../../Components/Main-content/TableBody";
+import { useState } from "react";
 
 
 
@@ -12,14 +13,20 @@ import { TableBody } from "../../Components/Main-content/TableBody";
 
 const BusPage = () => {
   const busList = getBusData();
+  const [isEditable, setSetEditable] = useState<boolean>(false)
+    const switchToEdit = () => {
+        setSetEditable(() => !isEditable)
+    }
   return (
     <StylesAppContent>
-      <StyledHeaderContent page={"Bus"} />
+      <StyledHeaderContent page={"Bus"} onPressed={()=>{
+        setSetEditable(true)
+      }} />
       <StyledTable>
         <TableContainer>
           <Table variant="striped" size="sm">
             <TableHeaderContent title={tableHeaderBus} />
-            <TableBody data={busList} dataTitle={tableHeaderBus}/>
+            <TableBody editable={isEditable} editImput={switchToEdit} data={busList} dataTitle={tableHeaderBus}/>
           </Table>
         </TableContainer>
       </StyledTable>

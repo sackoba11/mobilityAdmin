@@ -19,14 +19,10 @@ const StyledTd = styled.td`
 export const TableRow = ({ dataTitle, data, index }: DataList) => {
   return (
     <Tr key={index}>
-      {dataTitle.map((dataTitleItem, index) => (
-        <>
-          <StyledTd key={index }>
-            {data[dataTitleItem.label.toLowerCase()]}
-          </StyledTd>
-          
-          
-        </>
+      {dataTitle.map((dataTitleItem, i) => (
+        <StyledTd key={i} align="center">
+          {data[dataTitleItem.label.toLowerCase()]}
+        </StyledTd>
       ))}
       <IconsEditDelette />{" "}
     </Tr>

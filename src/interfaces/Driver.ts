@@ -14,8 +14,6 @@ export type Driver = {
     {
         label: "Email",
     },
-    {
-      label: "Actions",
-    },
+    
   ];
   
