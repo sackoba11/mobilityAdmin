@@ -5,19 +5,26 @@ import { TableBody } from "../../Components/Main-content/TableBody";
 import { TableHeaderContent } from "../../Components/Main-content/TableHeader";
 import {  getDriverData } from "../../Data/data-mock/data-mock";
 import { TableheaderDriver } from "../../interfaces/Driver";
+import { useState } from "react";
 
 
 const DriverPage = () => {
   const driverList = getDriverData();
+  const [isEditable, setSetEditable] = useState<boolean>(false)
+    const switchToEdit = () => {
+        setSetEditable(() => !isEditable)
+    }
   return (
     <>
       <StylesAppContent>
-      <StyledHeaderContent page={"Conducteurs"} />
+      <StyledHeaderContent onPressed={()=>{
+        setSetEditable(true)
+      }} page={"Conducteurs"} />
       <StyledTable>
         <TableContainer>
           <Table variant="striped" size="sm">
             <TableHeaderContent title={TableheaderDriver} />
-            <TableBody data={driverList} dataTitle={TableheaderDriver}/>
+            <TableBody editable={isEditable} editImput={switchToEdit} data={driverList} dataTitle={TableheaderDriver}/>
           </Table>
         </TableContainer>
       </StyledTable>

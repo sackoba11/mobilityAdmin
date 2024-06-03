@@ -5,20 +5,27 @@ import { TableBody } from "../../Components/Main-content/TableBody";
 import { TableHeaderContent } from "../../Components/Main-content/TableHeader";
 import {  getStationData } from "../../Data/data-mock/data-mock";
 import { TableHeaderStation } from "../../interfaces/station";
+import { useState } from "react";
 
 
 
 const Gares = () => {
   const stationList = getStationData();
+  const [isEditable, setSetEditable] = useState<boolean>(false)
+    const switchToEdit = () => {
+        setSetEditable(() => !isEditable)
+    }
     return (
       <> 
       <StylesAppContent>
-      <StyledHeaderContent page={"Gares"} />
+      <StyledHeaderContent onPressed={()=>{
+        setSetEditable(true)
+      }} page={"Gares"} />
       <StyledTable>
         <TableContainer>
           <Table variant="striped" size="sm">
             <TableHeaderContent title={TableHeaderStation} />
-            <TableBody data={stationList} dataTitle={TableHeaderStation}/>
+            <TableBody editable={isEditable} editImput={switchToEdit} data={stationList} dataTitle={TableHeaderStation}/>
           </Table>
         </TableContainer>
       </StyledTable>
