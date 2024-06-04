@@ -1,24 +1,24 @@
-import { Bus } from "../../interfaces/Bus";
+// import { Bus } from "../../interfaces/Bus";
 import { Driver } from "../../interfaces/Driver";
 import { AllUsers } from "../../interfaces/User";
 import { Station } from "../../interfaces/station";
 
-export const getBusData=()=>{
-    const tableRow: Bus[] = [];
-  for (let index = 0; index < 50; index++) {
-    tableRow.push({
-      id: index,
-      numero: "85",
-      source: "Gare Campus",
-      destination: " Youpgon kouté",
-      itineraire: "Youpgon kouté - Gare Campus",
-      statut: index % 2 == 0 ? true : false,
-    });
-  }
+// export const getBusData=()=>{
+//     const tableRow: Bus[] = [];
+//   for (let index = 0; index < 50; index++) {
+//     tableRow.push({
+//       id: index,
+//       numero: "85",
+//       source: "Gare Campus",
+//       destination: " Youpgon kouté",
+//       itineraire: ["Youpgon kouté - Gare Campus"],
+//       statut: index % 2 == 0 ? true : false,
+//     });
+//   }
 
-  return tableRow;
+//   return tableRow;
 
-}
+// }
 export const getDriverData=()=>{
     const tableRow: Driver[] = [];
   for (let index = 0; index < 30; index++) {

@@ -15,12 +15,12 @@ export const TableBody = ({ data, dataTitle, editImput, editable}: DataList) => 
     
   return (
     <Tbody>
-      {data.map((dataItem: never, index: number) => (
+      {data.map((dataItem:never, index: number) => (
         <TableRow
           key={index}
           data={dataItem}
           dataTitle={dataTitle}
-          index={index}
+          
         />
       ))}
     { editable? <TableRowImput editImput={editImput} dataTitle={dataTitle}/>:null}

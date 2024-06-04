@@ -14,7 +14,7 @@ export const TableRowImput = ({ dataTitle, editImput }: DataList) => {
       {dataTitle.map((column, i) => (
         <Td key={i}>
           <Input
-            // w="90%"
+            w="90%"
             name={column.label}
             placeholder={column.label}
             size="lg"
