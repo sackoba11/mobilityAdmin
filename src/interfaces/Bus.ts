@@ -1,4 +1,4 @@
-type Itineraire=
+export type Itineraire=
   {
 lat:number;
 long:number
