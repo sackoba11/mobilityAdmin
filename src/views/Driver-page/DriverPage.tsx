@@ -3,13 +3,13 @@ import { StyledTable, StylesAppContent } from "../../Components/Main-content/Sty
 import { StyledHeaderContent } from "../../Components/Main-content/StyledHeaderContent";
 import { TableBody } from "../../Components/Main-content/TableBody";
 import { TableHeaderContent } from "../../Components/Main-content/TableHeader";
-import {  getDriverData } from "../../Data/data-mock/data-mock";
-import { TableheaderDriver } from "../../interfaces/Driver";
+import {  TableheaderDriver } from "../../interfaces/Driver";
+import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 
 
 const DriverPage = () => {
-  const driverList = getDriverData();
+const driverList=useLoaderData()
   const [isEditable, setSetEditable] = useState<boolean>(false)
     const switchToEdit = () => {
         setSetEditable(() => !isEditable)

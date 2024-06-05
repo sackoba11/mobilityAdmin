@@ -1,7 +1,7 @@
 // import { Bus } from "../../interfaces/Bus";
-import { Driver } from "../../interfaces/Driver";
+// import { Driver } from "../../interfaces/Driver";
 import { AllUsers } from "../../interfaces/User";
-import { Station } from "../../interfaces/station";
+// import { Station } from "../../interfaces/station";
 
 // export const getBusData=()=>{
 //     const tableRow: Bus[] = [];
@@ -19,39 +19,39 @@ import { Station } from "../../interfaces/station";
 //   return tableRow;
 
 // }
-export const getDriverData=()=>{
-    const tableRow: Driver[] = [];
-  for (let index = 0; index < 30; index++) {
-    tableRow.push({
-      id: index,
-      email:"badrasacko11@hmail.com",
-      nom:"Sacko BA"
-    });
-  }
+// export const getDriverData=()=>{
+//     const tableRow: Driver[] = [];
+//   for (let index = 0; index < 30; index++) {
+//     tableRow.push({
+//       id: index,
+//       email:"badrasacko11@hmail.com",
+//       nom:"Sacko BA"
+//     });
+//   }
 
-  return tableRow;
+//   return tableRow;
 
-}
-export const getStationData=()=>{
-    const tableRow: Station[] = [];
-  for (let index = 0; index < 50; index++) {
-    tableRow.push({
-      id: index,
-      libelle: "Adjamé Liberté",
-      commune:"Adjamé",
-      localisation:
-        [
-        "5.1555",
-        "-3.566"
-        ]
-    ,
-      type: index % 2 == 0 ? "Taxi" : "Gbaka",
-    });
-  }
+// }
+// export const getStationData=()=>{
+//     const tableRow: Station[] = [];
+//   for (let index = 0; index < 50; index++) {
+//     tableRow.push({
+//       id: index,
+//       libelle: "Adjamé Liberté",
+//       commune:"Adjamé",
+//       localisation:
+//         [
+//         "5.1555",
+//         "-3.566"
+//         ]
+//     ,
+//       type: index % 2 == 0 ? "Taxi" : "Gbaka",
+//     });
+//   }
 
-  return tableRow;
+  // return tableRow;
 
-}
+// }
 export const getUsersData=()=>{
     const tableRow: AllUsers[] = [];
   for (let index = 0; index < 50; index++) {

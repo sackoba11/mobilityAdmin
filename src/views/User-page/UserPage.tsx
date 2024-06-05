@@ -3,13 +3,13 @@ import { StyledTable, StylesAppContent } from "../../Components/Main-content/Sty
 import { StyledHeaderContent } from "../../Components/Main-content/StyledHeaderContent";
 import { TableBody } from "../../Components/Main-content/TableBody";
 import { TableHeaderContent } from "../../Components/Main-content/TableHeader";
-import {  getUsersData } from "../../Data/data-mock/data-mock";
 import { TableHeaderUsers } from "../../interfaces/User";
 import { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 
 const UserPage = () => {
-  const userList = getUsersData();
+  const userList = useLoaderData();
   const [isEditable, setSetEditable] = useState<boolean>(false)
     const switchToEdit = () => {
         setSetEditable(() => !isEditable)

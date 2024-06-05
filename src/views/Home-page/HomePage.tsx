@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import { listBus } from "../../Data/data_remote/dataRemoteFromFirebase";
-
 const StylesAppContent = styled.div`
   display: flex;
   align-items: center;
@@ -9,7 +7,6 @@ const StylesAppContent = styled.div`
   height: 100vh;
 `;
 const HomePage = () => {
-  console.log(listBus)
   return (
     <>
       <StylesAppContent>

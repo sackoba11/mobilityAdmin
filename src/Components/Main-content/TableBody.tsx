@@ -20,10 +20,10 @@ export const TableBody = ({ data, dataTitle, editImput, editable}: DataList) => 
           key={index}
           data={dataItem}
           dataTitle={dataTitle}
-          
+          index={index}  
         />
       ))}
-    { editable? <TableRowImput editImput={editImput} dataTitle={dataTitle}/>:null}
+    { editable? <TableRowImput editImput={editImput} dataTitle={dataTitle}/>:<></>}
     </Tbody>
   );
 };

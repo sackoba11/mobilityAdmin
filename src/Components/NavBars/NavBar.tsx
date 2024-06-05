@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import AppColors from "../../Common/Theme/Colors";
 import { IoMdBus } from "react-icons/io";
 import { MdHome } from "react-icons/md";
@@ -21,15 +21,12 @@ const StyledItem = styled(NavLink)`
 `;
 
 function NavBar() {
-
   return (
     <HeaderStyled>
       <StyledItem
         to="/"
         style={({ isActive }) =>
-          isActive
-            ? { backgroundColor: AppColors.gray }
-            : { }
+          isActive ? { backgroundColor: AppColors.gray } : {}
         }
       >
         <MdHome style={{ marginRight: "25px" }} />
@@ -38,9 +35,7 @@ function NavBar() {
       <StyledItem
         to="/bus"
         style={({ isActive }) =>
-          isActive
-            ? { backgroundColor: AppColors.gray }
-            : {}
+          isActive ? { backgroundColor: AppColors.gray } : {}
         }
       >
         {" "}
@@ -50,9 +45,7 @@ function NavBar() {
       <StyledItem
         to="/drivers"
         style={({ isActive }) =>
-          isActive
-            ? { backgroundColor: AppColors.gray }
-            : {}
+          isActive ? { backgroundColor: AppColors.gray } : {}
         }
       >
         {" "}
@@ -62,9 +55,7 @@ function NavBar() {
       <StyledItem
         to="/gares"
         style={({ isActive }) =>
-          isActive
-            ? { backgroundColor: AppColors.gray }
-            : {}
+          isActive ? { backgroundColor: AppColors.gray } : {}
         }
       >
         {" "}
@@ -74,9 +65,7 @@ function NavBar() {
       <StyledItem
         to="/users"
         style={({ isActive }) =>
-          isActive
-            ? { backgroundColor: AppColors.gray }
-            : {}
+          isActive ? { backgroundColor: AppColors.gray } : {}
         }
       >
         {" "}

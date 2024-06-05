@@ -1,5 +1,5 @@
 import { Table, TableContainer } from "@chakra-ui/react";
-import { Bus, tableHeaderBus } from "../../interfaces/Bus";
+import {  tableHeaderBus } from "../../interfaces/Bus";
 import {
   StyledTable,
   StylesAppContent,
@@ -7,19 +7,12 @@ import {
 import { StyledHeaderContent } from "../../Components/Main-content/StyledHeaderContent";
 import { TableHeaderContent } from "../../Components/Main-content/TableHeader";
 import { TableBody } from "../../Components/Main-content/TableBody";
-import { useEffect, useState } from "react";
-import { getListBus } from "../../Data/data_remote/dataRemoteFromFirebase";
+import {  useState } from "react";
+import { useLoaderData } from "react-router-dom";
 
 const BusPage = () => {
-  const [busList, setBuslist] = useState<Bus[]>([]);
 
-  useEffect(() => {
-    async function fechData() {
-      setBuslist(await getListBus());
-    }
-    fechData();
-  }, []);
-
+const busList=useLoaderData()
   const [isEditable, setSetEditable] = useState<boolean>(false);
   const switchToEdit = () => {
     setSetEditable(() => !isEditable);
