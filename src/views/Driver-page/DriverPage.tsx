@@ -31,7 +31,7 @@ const DriverPage = () => {
           <TableContainer>
             <Table variant="striped" size="sm">
               <TableHeaderContent title={TableheaderDriver} />
-              <Suspense fallback={<StyledSkeleton title={TableheaderDriver}/>}>
+              <Suspense fallback={<StyledSkeleton title={TableheaderDriver} />}>
                 <Await
                   resolve={driverListPromise.driverListPromise}
                   errorElement={<p>Error loading package location!</p>}
