@@ -8,13 +8,14 @@ import {
 import { app } from "../../firebase.config";
 import { Signal, signal } from "@preact/signals-react";
 import { AllUsers } from "../../interfaces/User";
+import { defer } from "react-router-dom";
 
 const db = getFirestore(app);
 
 let lastUpdateDate: Date | null = null;
 export const listUsers: Signal<AllUsers[]> = signal([]);
 export class UsersDataState {
-  static getListBus = async (): Promise<AllUsers[]> => {
+  static getListUsers = async (): Promise<AllUsers[]> => {
     const currentDate = new Date();
     if (!lastUpdateDate || currentDate.getHours() > lastUpdateDate.getHours()) {
       try {
@@ -42,5 +43,9 @@ export class UsersDataState {
     }
 
     return listUsers.value;
+  };
+
+  static loaderUsers = () => {
+    return defer({ usersListPromise: UsersDataState.getListUsers() });
   };
 }

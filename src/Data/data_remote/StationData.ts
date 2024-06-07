@@ -2,13 +2,14 @@ import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { app } from "../../firebase.config";
 import { Signal, signal } from "@preact/signals-react";
 import { Station } from "../../interfaces/station";
+import { defer } from "react-router-dom";
 
 const db = getFirestore(app);
 
 let lastUpdateDate: Date | null = null;
 export const listStation: Signal<Station[]> = signal([]);
 export class StationDataState {
-  static getListSatation = async (): Promise<Station[]> => {
+  static getListStation = async (): Promise<Station[]> => {
     const currentDate = new Date();
     if (!lastUpdateDate || currentDate.getHours() > lastUpdateDate.getHours()) {
       try {
@@ -41,6 +42,10 @@ export class StationDataState {
       lastUpdateDate = new Date();
     }
 
-    return listStation.value;
+    return listStation.value ;
+  };
+
+  static loaderStation =  () => {
+    return defer({ stationListPromise: StationDataState.getListStation() });
   };
 }

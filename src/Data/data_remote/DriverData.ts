@@ -2,6 +2,7 @@ import { collection, getDocs, getFirestore, query, where } from "firebase/firest
 import { app } from "../../firebase.config";
 import { Driver } from "../../interfaces/Driver";
 import { Signal, signal } from "@preact/signals-react";
+import { defer } from "react-router-dom";
 
 const db = getFirestore(app);
 
@@ -34,9 +35,11 @@ export class DriversDataState{
     lastUpdateDate=new Date();
   }
   
-    return listDriver.value;
+    return listDriver.value ;
   };
-
+  static loaderDriver =  () => {
+    return defer({ driverListPromise: DriversDataState.getListDrivers() });
+  };
 
 }
  
