@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, defer } from "react-router-dom";
 import Root from "../views/Root";
 import HomePage from "../views/Home-page/HomePage";
 import ErrorPage from "../views/Error-Page/ErrorPage";
@@ -23,7 +23,11 @@ const AppRoutes = createBrowserRouter([
       },
       {
         path: "bus",
-        loader: BusDataState.getListBus,
+        loader: async () => {
+          const data = await BusDataState.getListBus;
+          return defer({ data });
+        },
+
         element: <BusPage />,
       },
       {

@@ -5,31 +5,37 @@ import { Signal, signal } from "@preact/signals-react";
 
 const db = getFirestore(app);
 
+let lastUpdateDate:Date|null=null;
 export const listBus: Signal<Bus[]> = signal([]);
 
 export class BusDataState{
-   static getListBus = async (): Promise<Bus[]> => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "listBus"));
-      if (querySnapshot) {
-        querySnapshot.docs.map((doc, index) => {
-          listBus.value.push({
-            id: index,
-            numero: doc.data().number,
-            source: doc.data().source,
-            destination: doc.data().destination,
-            itineraire: doc.data().roadMap,
-            statut: doc.data().isActive,
-          });
-        });
-      } else {
-        alert("error Liste Vide");
+  
+   static getListBus = async () => {
+    const currentDate=new Date();
+    if(!lastUpdateDate || currentDate.getSeconds()>lastUpdateDate.getSeconds()){
+      try {
+        const querySnapshot = await getDocs(collection(db, "listBus"));
+        listBus.value=[];
+        if (querySnapshot) {
+          listBus.value=[...querySnapshot.docs.map((doc, index) => ({
+              id: index,
+              numero: doc.data().number,
+              source: doc.data().source,
+              destination: doc.data().destination,
+              itineraire: doc.data().roadMap,
+              statut: doc.data().isActive,
+            }))
+          ]
+        } else {
+          alert("error Liste Vide");
+        }
+      } catch (error) {
+        alert(error);
       }
-    } catch (error) {
-      alert(error);
+      lastUpdateDate=new Date();
     }
   
-    return listBus.value;
+    return  listBus.value ;
   };
 }
 

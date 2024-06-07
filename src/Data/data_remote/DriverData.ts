@@ -5,31 +5,34 @@ import { Signal, signal } from "@preact/signals-react";
 
 const db = getFirestore(app);
 
+let lastUpdateDate:Date|null=null;
 export const listDriver:Signal<Driver[]> = signal([])
-
-
 export class DriversDataState{
 
   static    getListDrivers =async  (): Promise<Driver[]> => {
+    const currentDate=new Date();
+    if(!lastUpdateDate || currentDate.getHours()>lastUpdateDate.getHours()){
     try {
       const q=query(collection(db, "users"), where("isDriver","==",true))
       const querySnapshot = await getDocs(q);
+      listDriver.value=[];
       if (querySnapshot) {
-        querySnapshot.docs.map((doc, index) => {
-          listDriver.value.push({
+        listDriver.value=[...querySnapshot.docs.map((doc, index) => ({
               id:index,
               uuid:doc.id,
               nom:doc.data().name,
               email:doc.data().email
   
-          });
-        });
+          }))
+        ]
       } else {
         alert("error Liste Vide");
       }
     } catch (error) {
       alert(error);
     }
+    lastUpdateDate=new Date();
+  }
   
     return listDriver.value;
   };
