@@ -1,6 +1,6 @@
-import { Button, Input, Td, Tr } from "@chakra-ui/react";
+import { Button,  Input, Td, Tr, } from "@chakra-ui/react";
 import { TableHeaderBus } from "../../interfaces/Bus";
-import { CloseIcon } from "@chakra-ui/icons";
+import {  CloseIcon,  } from "@chakra-ui/icons";
 import AppColors from "../../Common/Theme/Colors";
 import { useEffect, useRef } from "react";
 type DataList = {
@@ -113,5 +113,61 @@ export const TableRowImput = ({ dataTitle, editImput, nextId }: DataList) => {
         </Td>
       ))}
     </Tr>
+      //  <Tr>
+      //   <CustomControlsExample></CustomControlsExample>
+      // </Tr>
   );
 };
+
+// function CustomControlsExample() {
+  
+//   function EditableControls() {
+//     const {
+//       isEditing,
+//       getSubmitButtonProps,
+//       getCancelButtonProps,
+//       getEditButtonProps,
+//     } = useEditableControls()
+
+//     return isEditing ? (
+//       <ButtonGroup justifyContent='center' size='sm'>
+//         <Button children={<CheckIcon />} {...getSubmitButtonProps()} />
+//         <Button children={<CloseIcon />} {...getCancelButtonProps()} />
+//       </ButtonGroup>
+//     ) : (
+//       <Flex justifyContent='center'>
+//         <Button size='sm' children={<EditIcon />} {...getEditButtonProps()} />
+//       </Flex>
+//     )
+//   }
+
+//   return (
+//     <Tr
+//     display={"flex"}
+//     ><Editable
+//     display={"flex"}
+//       textAlign='center'
+//       defaultValue='Rasengan ⚡️'
+//       fontSize='2xl'
+//       isPreviewFocusable={false}
+//     >
+//       <EditablePreview />
+//       {/* Here is the custom input */}
+//       <Input as={EditableInput} />
+//       {/* <EditableControls /> */}
+//     </Editable>
+//     <Editable
+//     display={"flex"}
+//       textAlign='center'
+//       defaultValue='sacko ⚡️'
+//       fontSize='2xl'
+//       isPreviewFocusable={false}
+//     >
+//       <EditablePreview />
+//       {/* Here is the custom input */}
+//       <Input as={EditableInput} />
+//       <EditableControls />
+//     </Editable>
+//       </Tr>
+//   )
+// }

@@ -47,3 +47,4 @@ export const TableRow = ({ dataTitle, data, index }: DataList) => {
     </Tr>
   );
 };
+
