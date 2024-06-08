@@ -1,20 +1,36 @@
-import { Button,  Input, Td, Tr, } from "@chakra-ui/react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button, Input, Td, Tr } from "@chakra-ui/react";
 import { TableHeaderBus } from "../../interfaces/Bus";
-import {  CloseIcon,  } from "@chakra-ui/icons";
+import { CloseIcon } from "@chakra-ui/icons";
 import AppColors from "../../Common/Theme/Colors";
 import { useEffect, useRef } from "react";
 type DataList = {
   dataTitle: TableHeaderBus[];
+  submit: (data: any) => Promise<void>;
   editImput: () => void;
   nextId: number;
 };
 
-export const TableRowImput = ({ dataTitle, editImput, nextId }: DataList) => {
-
-  let dataList: (string | undefined)[] = [];
+export const TableRowImput = ({
+  dataTitle,
+  editImput,
+  nextId,
+  submit,
+}: DataList) => {
+  let dataList: string[] = [];
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const inputRefs = dataTitle.map(() => useRef<HTMLInputElement>(null));
-  
+
+  const SubmitData = () => {
+    dataList = [];
+    inputRefs.forEach((element) => {
+      const data = element.current!.value;
+      dataList.push(data);
+    });
+
+    submit(dataList);
+  };
+
   const handleSubmit = (
     e: React.KeyboardEvent<HTMLInputElement>,
     inputIndex: number
@@ -24,20 +40,14 @@ export const TableRowImput = ({ dataTitle, editImput, nextId }: DataList) => {
         const nextInput = inputRefs[inputIndex + 1];
         nextInput.current?.focus();
       } else {
-        dataList = [];
-        inputRefs.forEach((element) => {
-          const data = element.current?.value;
-          dataList.push(data);
-        });
-
-        alert(dataList);
+        SubmitData();
       }
     }
   };
 
-  useEffect(()=>{
-    inputRefs[1].current?.focus()
-  },[])
+  useEffect(() => {
+    inputRefs[1].current?.focus();
+  }, []);
 
   return (
     <Tr>
@@ -69,7 +79,6 @@ export const TableRowImput = ({ dataTitle, editImput, nextId }: DataList) => {
                 />
               ) : (
                 <Input
-                
                   w="80%"
                   ref={inputRefs[i]}
                   onKeyDown={(e) => handleSubmit(e, i)}
@@ -97,13 +106,7 @@ export const TableRowImput = ({ dataTitle, editImput, nextId }: DataList) => {
                 }}
                 type="submit"
                 onClick={() => {
-                  dataList = [];
-                  inputRefs.forEach((element) => {
-                    const data = element.current?.value;
-                    dataList.push(data);
-                  });
-
-                  alert(dataList);
+                  SubmitData()
                 }}
               >
                 Valider
@@ -113,14 +116,14 @@ export const TableRowImput = ({ dataTitle, editImput, nextId }: DataList) => {
         </Td>
       ))}
     </Tr>
-      //  <Tr>
-      //   <CustomControlsExample></CustomControlsExample>
-      // </Tr>
+    //  <Tr>
+    //   <CustomControlsExample></CustomControlsExample>
+    // </Tr>
   );
 };
 
 // function CustomControlsExample() {
-  
+
 //   function EditableControls() {
 //     const {
 //       isEditing,

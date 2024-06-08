@@ -13,6 +13,14 @@ export type Bus = {
   itineraire:Itineraire[];
   statut: boolean;
 };
+export type BusToFirebase = {
+  number: string;
+  source: string;
+  destination: string;
+  roadMap:Itineraire[];
+  isActive: boolean;
+
+};
 
 
 export type TableHeaderBus={

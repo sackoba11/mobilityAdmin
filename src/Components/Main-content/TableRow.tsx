@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Tr } from "@chakra-ui/react";
 import { Itineraire, TableHeaderBus } from "../../interfaces/Bus";
 import { IconsEditDelette } from "../IconsEditDelette";
@@ -5,9 +6,9 @@ import styled from "styled-components";
 
 type DataList = {
   dataTitle: TableHeaderBus[];
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any;
   index: number;
+  
 };
 
 const StyledTd = styled.td`
