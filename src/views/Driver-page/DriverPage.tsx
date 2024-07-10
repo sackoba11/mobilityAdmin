@@ -10,6 +10,7 @@ import { TableheaderDriver } from "../../interfaces/Driver";
 import { Await, useLoaderData } from "react-router-dom";
 import { Suspense, useState } from "react";
 import { StyledSkeleton } from "../../Components/Main-content/StyledSkeleton";
+import { DriversDataState } from "../../Data/data_remote/DriverData";
 
 const DriverPage = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,6 +39,7 @@ const DriverPage = () => {
                 >
                   {(listDriver) => (
                     <TableBody
+                    submitImput={DriversDataState.addDriver}
                       editable={isEditable}
                       editImput={switchToEdit}
                       data={listDriver}

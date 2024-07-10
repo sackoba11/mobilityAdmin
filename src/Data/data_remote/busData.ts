@@ -55,12 +55,11 @@ export class BusDataState {
       isActive: false,
     };
 
-    console.log(dataBus);
+    try {
+      console.log(dataBus)
+      alert(dataBus.number);
+    } catch (error) {
+      console.log(error);
+    }
   };
-
-  // try {
-
-  // } catch (error) {
-  //   console.log(error)
-  // }
 }

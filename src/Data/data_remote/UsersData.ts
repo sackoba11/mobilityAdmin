@@ -48,4 +48,6 @@ export class UsersDataState {
   static loaderUsers = () => {
     return defer({ usersListPromise: UsersDataState.getListUsers() });
   };
+
+  
 }

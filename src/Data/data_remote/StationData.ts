@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { collection, getDocs, getFirestore } from "firebase/firestore";
 import { app } from "../../firebase.config";
 import { Signal, signal } from "@preact/signals-react";
-import { Station } from "../../interfaces/station";
+import { Location, Station, StationToFirebase } from "../../interfaces/station";
 import { defer } from "react-router-dom";
 
 const db = getFirestore(app);
@@ -17,13 +18,15 @@ export class StationDataState {
         const querySnapshotTaxi = await getDocs(collection(db, "GaresTaxi"));
         listStation.value = [];
         if (querySnapshotGbaka || querySnapshotTaxi) {
-          listStation.value = [...querySnapshotGbaka.docs.map((doc, index) => ({
-            id: index,
-            libelle: doc.data().name,
-            commune: doc.data().commune,
-            type: doc.data().type,
-            localisation: doc.data().location,
-          }))];
+          listStation.value = [
+            ...querySnapshotGbaka.docs.map((doc, index) => ({
+              id: index,
+              libelle: doc.data().name,
+              commune: doc.data().commune,
+              type: doc.data().type,
+              localisation: doc.data().location,
+            })),
+          ];
 
           listStation.value = [
             ...listStation.value,
@@ -42,10 +45,31 @@ export class StationDataState {
       lastUpdateDate = new Date();
     }
 
-    return listStation.value ;
+    return listStation.value;
   };
 
-  static loaderStation =  () => {
+  static loaderStation = () => {
     return defer({ stationListPromise: StationDataState.getListStation() });
+  };
+
+  static addStation = async (data: any): Promise<void> => {
+    const location: Location = {
+      label: "teste lacation",
+      lat: data[4].lat,
+      long: data[4].long,
+    };
+    const dataStation: StationToFirebase = {
+      name: data[1],
+      commune: data[2],
+      type: data[3],
+      location: location,
+    };
+
+    try {
+      console.log(dataStation)
+      alert(dataStation.name);
+    } catch (error) {
+      console.log(error);
+    }
   };
 }

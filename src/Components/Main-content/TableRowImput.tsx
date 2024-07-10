@@ -18,6 +18,7 @@ export const TableRowImput = ({
   submit,
 }: DataList) => {
   let dataList: string[] = [];
+  
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const inputRefs = dataTitle.map(() => useRef<HTMLInputElement>(null));
 
@@ -25,9 +26,10 @@ export const TableRowImput = ({
     dataList = [];
     inputRefs.forEach((element) => {
       const data = element.current!.value;
-      dataList.push(data);
+      console.log(data)
+      dataList = [...dataList, data];
     });
-
+console.log(dataList)
     submit(dataList);
   };
 
@@ -59,6 +61,7 @@ export const TableRowImput = ({
               onKeyDown={(e) => handleSubmit(e, i)}
               readOnly
               w="80%"
+              h={"40px"}
               border={`1px solid ${AppColors.gray}`}
               name={column.label}
               placeholder={`${nextId}`}
@@ -69,6 +72,7 @@ export const TableRowImput = ({
               {column.label == "Email" ? (
                 <Input
                   w="80%"
+                  h={"40px"}
                   ref={inputRefs[i]}
                   onKeyDown={(e) => handleSubmit(e, i)}
                   type="email"
@@ -78,99 +82,79 @@ export const TableRowImput = ({
                   size="lg"
                 />
               ) : (
-                <Input
-                  w="80%"
-                  ref={inputRefs[i]}
-                  onKeyDown={(e) => handleSubmit(e, i)}
-                  border={`1px solid ${AppColors.gray}`}
-                  name={column.label}
-                  placeholder={column.label}
-                  size="lg"
-                />
+                <>
+                  {column.label == "Localisation" ? (
+                    
+                   <> <Input
+                      w="35%"
+                      h={"40px"}
+                      ref={inputRefs[i]}
+                      onKeyDown={(e) => handleSubmit(e, i)}
+                      border={`1px solid ${AppColors.gray}`}
+                      name={"latitude"}
+                      placeholder={"Latitude"}
+                      size="lg"
+                      marginRight={5}
+                    />
+                    <Input
+                      w="35%"
+                      h={"40px"}
+                      ref={inputRefs[i]}
+                      onKeyDown={(e) => handleSubmit(e, i)}
+                      border={`1px solid ${AppColors.gray}`}
+                      name={"Longitude"}
+                      placeholder={"Longitude"}
+                      size="lg"
+                    />
+                    </>
+                  ) : (
+                    <Input
+                      w="80%"
+                      h={"40px"}
+                      ref={inputRefs[i]}
+                      onKeyDown={(e) => handleSubmit(e, i)}
+                      border={`1px solid ${AppColors.gray}`}
+                      name={column.label}
+                      placeholder={column.label}
+                      size="lg"
+                    />
+                  )}
+                </>
               )}
             </>
           )}
           {i == dataTitle.length - 1 && (
             <>
+            <Button
+                style={{
+                  marginLeft: "4%",
+                  height: "40px",
+                  marginBottom: "8px",
+                  backgroundColor: AppColors.editIconColor,
+                }}
+                type="submit"
+                onClick={() => {
+                  SubmitData();
+                }}
+              >
+                Valider
+              </Button>
               <Button
-                style={{ marginLeft: "5%" }}
+                style={{
+                  marginLeft: "4%",
+                  height: "40px",
+                  marginBottom: "8px",
+                }}
                 onClick={() => {
                   editImput();
                 }}
                 children={<CloseIcon color={AppColors.erro} />}
               />
-              <Button
-                style={{
-                  marginLeft: "10%",
-                  backgroundColor: AppColors.editIconColor,
-                }}
-                type="submit"
-                onClick={() => {
-                  SubmitData()
-                }}
-              >
-                Valider
-              </Button>
+              
             </>
           )}
         </Td>
       ))}
     </Tr>
-    //  <Tr>
-    //   <CustomControlsExample></CustomControlsExample>
-    // </Tr>
   );
 };
-
-// function CustomControlsExample() {
-
-//   function EditableControls() {
-//     const {
-//       isEditing,
-//       getSubmitButtonProps,
-//       getCancelButtonProps,
-//       getEditButtonProps,
-//     } = useEditableControls()
-
-//     return isEditing ? (
-//       <ButtonGroup justifyContent='center' size='sm'>
-//         <Button children={<CheckIcon />} {...getSubmitButtonProps()} />
-//         <Button children={<CloseIcon />} {...getCancelButtonProps()} />
-//       </ButtonGroup>
-//     ) : (
-//       <Flex justifyContent='center'>
-//         <Button size='sm' children={<EditIcon />} {...getEditButtonProps()} />
-//       </Flex>
-//     )
-//   }
-
-//   return (
-//     <Tr
-//     display={"flex"}
-//     ><Editable
-//     display={"flex"}
-//       textAlign='center'
-//       defaultValue='Rasengan ⚡️'
-//       fontSize='2xl'
-//       isPreviewFocusable={false}
-//     >
-//       <EditablePreview />
-//       {/* Here is the custom input */}
-//       <Input as={EditableInput} />
-//       {/* <EditableControls /> */}
-//     </Editable>
-//     <Editable
-//     display={"flex"}
-//       textAlign='center'
-//       defaultValue='sacko ⚡️'
-//       fontSize='2xl'
-//       isPreviewFocusable={false}
-//     >
-//       <EditablePreview />
-//       {/* Here is the custom input */}
-//       <Input as={EditableInput} />
-//       <EditableControls />
-//     </Editable>
-//       </Tr>
-//   )
-// }

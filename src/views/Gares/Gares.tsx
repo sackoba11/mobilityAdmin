@@ -10,6 +10,7 @@ import { TableHeaderStation } from "../../interfaces/station";
 import { Suspense, useState } from "react";
 import { Await, useLoaderData } from "react-router-dom";
 import { StyledSkeleton } from "../../Components/Main-content/StyledSkeleton";
+import { StationDataState } from "../../Data/data_remote/StationData";
 
 const Gares = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,6 +39,7 @@ const Gares = () => {
                 >
                   {(listStation) => (
                     <TableBody
+                    submitImput={StationDataState.addStation}
                       editable={isEditable}
                       editImput={switchToEdit}
                       data={listStation}

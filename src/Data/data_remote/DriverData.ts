@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import { app } from "../../firebase.config";
-import { Driver } from "../../interfaces/Driver";
+import { Driver, DriverToFirebase } from "../../interfaces/Driver";
 import { Signal, signal } from "@preact/signals-react";
 import { defer } from "react-router-dom";
 
@@ -39,6 +40,21 @@ export class DriversDataState{
   };
   static loaderDriver =  () => {
     return defer({ driverListPromise: DriversDataState.getListDrivers() });
+  };
+
+  static addDriver = async (data: any): Promise<void> => {
+    const dataDriver: DriverToFirebase = {
+      name: data[1],
+      email: data[2],
+      isDriver: true,
+    };
+
+    try {
+      console.log(dataDriver)
+      alert(dataDriver.name);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 }

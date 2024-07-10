@@ -47,6 +47,7 @@ const BusPage = () => {
                     editImput={switchToEdit}
                     data={busList}
                     dataTitle={tableHeaderBus}
+                  
                   />
                 )}
               </Await>

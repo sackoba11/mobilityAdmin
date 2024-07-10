@@ -4,6 +4,13 @@ export type Driver = {
     nom: string;
     email: string;
   };
+
+  export type DriverToFirebase={
+    name:string;
+    email:string;
+    isDriver:boolean
+
+  }
   
   export const TableheaderDriver = [
     {
