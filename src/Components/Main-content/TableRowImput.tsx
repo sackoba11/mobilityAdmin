@@ -4,6 +4,8 @@ import { TableHeaderBus } from "../../interfaces/Bus";
 import { CloseIcon } from "@chakra-ui/icons";
 import AppColors from "../../Common/Theme/Colors";
 import { useEffect, useRef } from "react";
+
+
 type DataList = {
   dataTitle: TableHeaderBus[];
   submit: (data: any) => Promise<void>;
@@ -18,23 +20,25 @@ export const TableRowImput = ({
   submit,
 }: DataList) => {
   let dataList: string[] = [];
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const inputRefs = dataTitle.map(() => useRef<HTMLInputElement >(null));
   
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const inputRefs = dataTitle.map(() => useRef<HTMLInputElement>(null));
+  // const inputRefSelect = dataTitle.map(() => useRef<HTMLSelectElement>(null));
 
-  const SubmitData = () => {
+  const SubmitData =async () => {
     dataList = [];
     inputRefs.forEach((element) => {
       const data = element.current!.value;
-      console.log(data)
       dataList = [...dataList, data];
     });
-console.log(dataList)
-    submit(dataList);
+   await submit(dataList);
+   window.location.reload()
   };
 
   const handleSubmit = (
-    e: React.KeyboardEvent<HTMLInputElement>,
+    e: React.KeyboardEvent<HTMLInputElement | HTMLSelectElement>,
     inputIndex: number
   ) => {
     if (e.key == "Enter") {
@@ -83,29 +87,31 @@ console.log(dataList)
                 />
               ) : (
                 <>
-                  {column.label == "Localisation" ? (
-                    
-                   <> <Input
-                      w="35%"
-                      h={"40px"}
-                      ref={inputRefs[i]}
-                      onKeyDown={(e) => handleSubmit(e, i)}
-                      border={`1px solid ${AppColors.gray}`}
-                      name={"latitude"}
-                      placeholder={"Latitude"}
-                      size="lg"
-                      marginRight={5}
-                    />
-                    <Input
-                      w="35%"
-                      h={"40px"}
-                      ref={inputRefs[i]}
-                      onKeyDown={(e) => handleSubmit(e, i)}
-                      border={`1px solid ${AppColors.gray}`}
-                      name={"Longitude"}
-                      placeholder={"Longitude"}
-                      size="lg"
-                    />
+                  {column.label == "Type" ? (
+                    <>
+                      <Input
+                        w="80%"
+                        h={"40px"}
+                        ref={inputRefs[i]}
+                        onKeyDown={(e) => handleSubmit(e, i)}
+                        border={`1px solid ${AppColors.gray}`}
+                        name={"Type"}
+                        placeholder={"Type"}
+                        size="lg"
+                        marginRight={5}
+                      ></Input>
+                      {/* <Select w="110%"
+                        h={"40px"}
+                        ref={inputRefSelect[i]}
+                        onKeyDown={(e) => handleSubmit(e, i)}
+                        border={`1px solid ${AppColors.gray}`}
+                        name={"latitude"}
+                        
+                        size="lg"
+                        marginRight={5}>
+                        <option value="Gbaka">Gbaka</option>
+                        <option value="Taxi">Taxi</option>
+                      </Select> */}
                     </>
                   ) : (
                     <Input
@@ -125,7 +131,7 @@ console.log(dataList)
           )}
           {i == dataTitle.length - 1 && (
             <>
-            <Button
+              <Button
                 style={{
                   marginLeft: "4%",
                   height: "40px",
@@ -150,7 +156,6 @@ console.log(dataList)
                 }}
                 children={<CloseIcon color={AppColors.erro} />}
               />
-              
             </>
           )}
         </Td>

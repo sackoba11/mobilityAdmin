@@ -1,7 +1,8 @@
 import { Itineraire } from "./Bus";
 
 export type Station = {
-  id: number;
+  id: string;
+  index:number
   libelle: string;
   type: string;
   commune: string;
@@ -21,8 +22,9 @@ export type StationToFirebase={
 }
 
 export const TableHeaderStation = [
+  
   {
-    label: "Id",
+    label: "Index",
   },
   {
     label: "Libelle",

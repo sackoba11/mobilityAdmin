@@ -58,7 +58,7 @@ export const TableRow = ({ dataTitle, data, index }: DataList) => {
           <StyledTd key={i}>{data[dataTitleItem.label.toLowerCase()]}</StyledTd>
         )
       )}
-      <IconsEditDelette key={index} />
-    </Tr>
+      <IconsEditDelette  id={data['id']} />
+    </Tr> 
   );
 };
