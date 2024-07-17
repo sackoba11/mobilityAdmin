@@ -1,5 +1,5 @@
 import {  Table, TableContainer } from "@chakra-ui/react";
-import { tableHeaderBus } from "../../interfaces/Bus";
+import { Bus, tableHeaderBus } from "../../interfaces/Bus";
 import {
   StyledTable,
   StylesAppContent,
@@ -7,21 +7,37 @@ import {
 import { StyledHeaderContent } from "../../Components/Main-content/StyledHeaderContent";
 import { TableHeaderContent } from "../../Components/Main-content/TableHeader";
 import { TableBody } from "../../Components/Main-content/TableBody";
-import { Suspense, useState } from "react";
-import { Await, useLoaderData } from "react-router-dom";
+import { Suspense, useEffect, useState } from "react";
+import { Await } from "react-router-dom";
 import { StyledSkeleton } from "../../Components/Main-content/StyledSkeleton";
 import { BusDataState } from "../../Data/data_remote/busData";
+import { signal, Signal } from "@preact/signals-react";
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const busListPromise: Signal<Bus[]> = signal([]);
 
 const BusPage = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const busListPromise: any = useLoaderData();
-  
+  const [state, setState] = useState<boolean>(false);
+  busListPromise.value = BusDataState.loaderBus().data
+    .busListPromise as Bus[];
   const [isEditable, setSetEditable] = useState<boolean>(false);
   const switchToEdit = () => {
     setSetEditable(() => !isEditable);
   };
 
-  
+  const reload = () => {
+    setState(() => !state);
+  };
+  const getData = async () => {
+    busListPromise.value = (await BusDataState.loaderBus().data
+      .busListPromise) as Bus[];
+    console.log(busListPromise.value);
+  };
+
+  useEffect(() => {
+    getData();
+    setState(false);
+  }, [state]);
 
   return (
     <StylesAppContent>
@@ -37,7 +53,7 @@ const BusPage = () => {
             <TableHeaderContent title={tableHeaderBus} />
             <Suspense fallback={<StyledSkeleton title={tableHeaderBus}/>}>
               <Await
-                resolve={busListPromise.busListPromise}
+                resolve={busListPromise.value}
                 errorElement={<p>Erreur de chargement des données</p>}
               >
                 {(busList) => (
@@ -45,9 +61,8 @@ const BusPage = () => {
                   submitImput={BusDataState.addBus}
                     editable={isEditable}
                     editImput={switchToEdit}
-                    resetOnDelete={()=>{
-                      console.log("bus")
-                    }}
+                    resetOnDelete={reload}
+                    deleteFunction={BusDataState.deleteBus}
                     data={busList}
                     dataTitle={tableHeaderBus}
                   

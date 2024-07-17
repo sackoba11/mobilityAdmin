@@ -8,7 +8,8 @@ type DataList = {
   dataTitle: TableHeaderBus[];
   data: any;
   index: number;
-  resetOnDelete:()=>void
+  resetOnDelete?:()=>void;
+  deleteFunction?:(id:string)=>Promise<void>
 };
 
 
@@ -22,7 +23,7 @@ const StyledTd = styled.td`
   justify-content: center;
   `;
 
-export const TableRow = ({ dataTitle, data, index,resetOnDelete }: DataList) => {
+export const TableRow = ({ dataTitle, data, index,resetOnDelete, deleteFunction }: DataList) => {
 
  
   return (
@@ -63,7 +64,7 @@ export const TableRow = ({ dataTitle, data, index,resetOnDelete }: DataList) => 
           <StyledTd key={i}>{data[dataTitleItem.label.toLowerCase()]}</StyledTd>
         )
       )}
-      <IconsEditDelette  id={data['id']} resetOnDelete={resetOnDelete}/>
+      <IconsEditDelette  id={data['id']} resetOnDelete={resetOnDelete} deleteFunction={deleteFunction}/>
     </Tr> 
   );
 };

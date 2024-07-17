@@ -13,8 +13,9 @@ import { Location, Station, StationToFirebase } from "../../interfaces/station";
 import { defer } from "react-router-dom";
 
 const db = getFirestore(app);
-const dbRefGbaka = collection(db, "GaresGbaka");
-const dbRefTaxi = collection(db, "GaresTaxi");
+const dbRefGares = collection(db, "Gares");
+// const dbRefGbaka = collection(db, "GaresGbaka");
+// const dbRefTaxi = collection(db, "GaresTaxi");
 let lastUpdateDate: Date | null = null;
 export const listStation: Signal<Station[]> = signal([]);
 
@@ -24,12 +25,13 @@ export class StationDataState {
     const currentDate = new Date();
     if (!lastUpdateDate || currentDate.getSeconds() > lastUpdateDate.getSeconds()) {
       try {
-        const querySnapshotGbaka = await getDocs(dbRefGbaka);
-        const querySnapshotTaxi = await getDocs(dbRefTaxi);
+        const querySnapshotGares = await getDocs(dbRefGares);
+        // const querySnapshotGbaka = await getDocs(dbRefGbaka);
+        // const querySnapshotTaxi = await getDocs(dbRefTaxi);
         listStation.value = [];
-        if (querySnapshotGbaka || querySnapshotTaxi) {
+        if (querySnapshotGares) {
           listStation.value = [
-            ...querySnapshotGbaka.docs.map((doc, index) => ({
+            ...querySnapshotGares.docs.map((doc, index) => ({
               id: doc.id,
               index: index,
               libelle: doc.data().name,
@@ -38,19 +40,31 @@ export class StationDataState {
               localisation: doc.data().location,
             })),
           ];
-
-          listStation.value = [
-            ...listStation.value,
-            ...querySnapshotTaxi.docs.map((doc, index) => ({
-              id: doc.id,
-              index: index + listStation.value.length,
-              libelle: doc.data().name,
-              commune: doc.data().commune,
-              type: doc.data().type,
-              localisation: doc.data().location,
-            })),
-          ];
         }
+        // if (querySnapshotGbaka || querySnapshotTaxi) {
+        //   listStation.value = [
+        //     ...querySnapshotGbaka.docs.map((doc, index) => ({
+        //       id: doc.id,
+        //       index: index,
+        //       libelle: doc.data().name,
+        //       commune: doc.data().commune,
+        //       type: doc.data().type,
+        //       localisation: doc.data().location,
+        //     })),
+        //   ];
+
+        //   listStation.value = [
+        //     ...listStation.value,
+        //     ...querySnapshotTaxi.docs.map((doc, index) => ({
+        //       id: doc.id,
+        //       index: index + listStation.value.length,
+        //       libelle: doc.data().name,
+        //       commune: doc.data().commune,
+        //       type: doc.data().type,
+        //       localisation: doc.data().location,
+        //     })),
+        //   ];
+        // }
       } catch (error) {
         console.log(error);
       }
@@ -81,27 +95,28 @@ export class StationDataState {
       name: data[1],
       commune: data[2],
       type: data[3],
-
       location: locationData,
     };
 
     try {
-      if (dataStation.type.toLowerCase() == "taxi") {
-        const docref = await addDoc(dbRefTaxi, dataStation);
-        console.log(docref.id);
-      } else {
-        const docref = await addDoc(dbRefGbaka, dataStation);
-        console.log(docref.id);
-      }
+
+      const docref = await addDoc(dbRefGares, dataStation);
+      console.log(docref.id);
+      // if (dataStation.type.toLowerCase() == "taxi") {
+      //   const docref = await addDoc(dbRefTaxi, dataStation);
+      //   console.log(docref.id);
+      // } else {
+      //   const docref = await addDoc(dbRefGbaka, dataStation);
+      //   console.log(docref.id);
+      // }
     } catch (error) {
       console.log(error);
     }
   };
 
-  static deletteStation = async (idStation:string): Promise<void> => {
+  static deleteStation = async (idStation:string): Promise<void> => {
     try {
-      await deleteDoc(doc(db, "GaresTaxi", idStation));
-       this.getListStation()
+      await deleteDoc(doc(db, "Gares", idStation));
     } catch (error) {
       console.log("erreur:",error);
     }

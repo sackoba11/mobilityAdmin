@@ -6,7 +6,8 @@ long:number
 
 
 export type Bus = {
-  id: number;
+  id: string;
+  index:number
   numero: string;
   source: string;
   destination: string;
@@ -29,7 +30,7 @@ export type TableHeaderBus={
 export const tableHeaderBus:TableHeaderBus[] = [
   
   {
-    label: "Id",
+    label: "Index",
   },
   {
     label: "Numero",

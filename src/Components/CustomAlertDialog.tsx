@@ -12,21 +12,23 @@ import {
   useToast,
   Spinner,
 } from "@chakra-ui/react";
-import { useCallback, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AppColors from "../Common/Theme/Colors";
-import { StationDataState } from "../Data/data_remote/StationData";
 type Data = {
   id: any;
-  resetOnDelete: () => void;
+  resetOnDelete?: () => void;
+  deleteFunction?:(id:string)=>Promise<void>
 };
 
-export const CustomAlertDialog = ({ id, resetOnDelete }: Data) => {
+export const CustomAlertDialog = ({ id, resetOnDelete, deleteFunction }: Data) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
   const [loading, setLoading] = useState(false);
-  const handleClick = useCallback(() => {
-    resetOnDelete();
-  }, []);
+
+  useEffect(() => {
+    resetOnDelete!();
+  }, [loading]);
+
   const toast = useToast({
     position: "top",
     title: "Container style is updated",
@@ -39,7 +41,7 @@ export const CustomAlertDialog = ({ id, resetOnDelete }: Data) => {
   const OnDeleteAction = async () => {
     setLoading(true);
     try {
-      await StationDataState.deletteStation(id);
+      await deleteFunction!(id);
       setLoading(false);
       onClose();
     } catch (error) {
@@ -90,10 +92,8 @@ export const CustomAlertDialog = ({ id, resetOnDelete }: Data) => {
                 ) : (
                   <Button
                     colorScheme="red"
-                    onClick={async () => {
+                    onClick={() => {
                       OnDeleteAction();
-                      onClose();
-                      handleClick()
                       toast({
                         title: "Suppression",
                         description: "Suppression réussie avec succès.",
@@ -101,6 +101,7 @@ export const CustomAlertDialog = ({ id, resetOnDelete }: Data) => {
                         duration: 2000,
                         isClosable: true,
                       });
+                      onClose();
                     }}
                     ml={3}
                   >

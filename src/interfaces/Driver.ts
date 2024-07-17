@@ -1,6 +1,6 @@
 export type Driver = {
-  uuid:string
-    id: number;
+  id:string
+    index: number;
     nom: string;
     email: string;
   };
@@ -14,7 +14,7 @@ export type Driver = {
   
   export const TableheaderDriver = [
     {
-      label: "Id",
+      label: "Index",
     },
     {
         label: "Nom",

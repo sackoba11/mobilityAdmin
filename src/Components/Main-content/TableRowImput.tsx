@@ -59,7 +59,7 @@ export const TableRowImput = ({
     <Tr>
       {dataTitle.map((column, i) => (
         <Td key={i}>
-          {column.label == "Id" ? (
+          {column.label == "Index" ? (
             <Input
               ref={inputRefs[i]}
               onKeyDown={(e) => handleSubmit(e, i)}

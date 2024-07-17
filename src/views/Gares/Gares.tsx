@@ -31,7 +31,6 @@ const Gares = () => {
   const getData = async () => {
     listStation.value = (await StationDataState.loaderStation().data
       .stationListPromise) as Station[];
-    console.log(listStation.value);
   };
 
   useEffect(() => {
@@ -65,6 +64,7 @@ const Gares = () => {
                       editable={isEditable}
                       editImput={switchToEdit}
                       resetOnDelete={reload}
+                      deleteFunction={StationDataState.deleteStation}
                       data={listStation}
                       dataTitle={TableHeaderStation}
                     />

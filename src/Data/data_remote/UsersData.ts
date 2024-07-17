@@ -1,5 +1,7 @@
 import {
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   getFirestore,
   query,
@@ -11,24 +13,25 @@ import { AllUsers } from "../../interfaces/User";
 import { defer } from "react-router-dom";
 
 const db = getFirestore(app);
-
+const refDb= collection(db, "users");
 let lastUpdateDate: Date | null = null;
 export const listUsers: Signal<AllUsers[]> = signal([]);
 export class UsersDataState {
   static getListUsers = async (): Promise<AllUsers[]> => {
     const currentDate = new Date();
-    if (!lastUpdateDate || currentDate.getHours() > lastUpdateDate.getHours()) {
+    if (!lastUpdateDate || currentDate.getSeconds() > lastUpdateDate.getSeconds()) {
       try {
         listUsers.value = [];
         const q = query(
-          collection(db, "users"),
+          refDb,
           where("isDriver", "==", false)
         );
         const querySnapshot = await getDocs(q);
         if (querySnapshot) {
           listUsers.value = [
             ...querySnapshot.docs.map((doc, index) => ({
-              id: index,
+              id: doc.id,
+              index:index,
               nom: doc.data().name,
               email: doc.data().email,
             })),
@@ -37,7 +40,7 @@ export class UsersDataState {
           alert("error Liste Vide");
         }
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
       lastUpdateDate = new Date();
     }
@@ -49,5 +52,11 @@ export class UsersDataState {
     return defer({ usersListPromise: UsersDataState.getListUsers() });
   };
 
-  
+  static deleteUser = async (idUser:string): Promise<void> => {
+    try {
+      await deleteDoc(doc(db, "users" , idUser));
+    } catch (error) {
+      console.log("erreur:",error);
+    }
+  };
 }

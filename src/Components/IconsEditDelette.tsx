@@ -5,10 +5,11 @@ import AppColors from "../Common/Theme/Colors";
 import { CustomAlertDialog } from "./CustomAlertDialog";
 type Data={
   id: any,
-  resetOnDelete:()=>void
+  resetOnDelete?:()=>void;
+  deleteFunction?:(id:string)=>Promise<void>
 }
 
-export const IconsEditDelette = ({id,resetOnDelete}:Data) => {
+export const IconsEditDelette = ({id,resetOnDelete, deleteFunction}:Data) => {
   
   return (
     <Td>
@@ -21,7 +22,7 @@ export const IconsEditDelette = ({id,resetOnDelete}:Data) => {
         }}
         onClick={() => alert("Modification")}
       />
-      <CustomAlertDialog id={id} resetOnDelete={resetOnDelete}/>
+      <CustomAlertDialog id={id} resetOnDelete={resetOnDelete} deleteFunction={deleteFunction}/>
     </Td>
   );
 };

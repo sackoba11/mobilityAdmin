@@ -10,7 +10,8 @@ type DataList = {
   editImput: () => void;
   submitImput?: (data: any) => Promise<void>;
   editable: boolean;
-  resetOnDelete:()=>void
+  resetOnDelete?:()=>void
+  deleteFunction?:(id:string)=>Promise<void>
 };
 
 export const TableBody = ({
@@ -20,6 +21,7 @@ export const TableBody = ({
   editable,
   submitImput,
   resetOnDelete,
+  deleteFunction
 }: DataList) => {
   
   return (
@@ -31,6 +33,7 @@ export const TableBody = ({
           dataTitle={dataTitle}
           index={index}
           resetOnDelete={resetOnDelete}
+          deleteFunction={deleteFunction}
         />
       ))}
       {editable ? (

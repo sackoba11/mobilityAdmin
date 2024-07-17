@@ -1,12 +1,13 @@
 export type AllUsers = {
-    id: number;
+    id: string;
+    index: number;
     nom: string;
     email: string;
   };
   
   export const TableHeaderUsers = [
     {
-      label: "Id",
+      label: "Index",
     },
     {
       label: "Nom",
