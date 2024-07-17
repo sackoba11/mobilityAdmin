@@ -45,6 +45,9 @@ const BusPage = () => {
                   submitImput={BusDataState.addBus}
                     editable={isEditable}
                     editImput={switchToEdit}
+                    resetOnDelete={()=>{
+                      console.log("bus")
+                    }}
                     data={busList}
                     dataTitle={tableHeaderBus}
                   

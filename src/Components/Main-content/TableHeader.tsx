@@ -2,7 +2,7 @@ import { Th, Thead, Tr } from "@chakra-ui/react";
 import AppColors from "../../Common/Theme/Colors";
 
 const styledTh = {
-  paddingTop:"15px",
+  paddingTop: "15px",
   alignItems: "center",
   alignContent: "center",
   fontWeight: "700",
@@ -20,15 +20,15 @@ type TableList = {
 };
 
 export const TableHeaderContent = ({ title }: TableList) => {
-    
   return (
     <Thead>
       <Tr>
         {title.map((label, index) => (
-          <Th key={index} style={styledTh}>{label.label}</Th>
+          <Th key={index} style={styledTh}>
+            {label.label}
+          </Th>
         ))}
       </Tr>
-
     </Thead>
   );
 };

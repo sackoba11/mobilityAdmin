@@ -8,7 +8,9 @@ type DataList = {
   dataTitle: TableHeaderBus[];
   data: any;
   index: number;
+  resetOnDelete:()=>void
 };
+
 
 const StyledTd = styled.td`
   font-size: 18px;
@@ -18,9 +20,11 @@ const StyledTd = styled.td`
   align-items: center;
   align-content: center;
   justify-content: center;
-`;
+  `;
 
-export const TableRow = ({ dataTitle, data, index }: DataList) => {
+export const TableRow = ({ dataTitle, data, index,resetOnDelete }: DataList) => {
+
+ 
   return (
     <Tr key={index}>
       {dataTitle.map((dataTitleItem, i) =>
@@ -52,13 +56,14 @@ export const TableRow = ({ dataTitle, data, index }: DataList) => {
           </StyledTd>
         ) : dataTitleItem.label.toLowerCase() == "localisation" ? (
           <StyledTd key={i}>{`lat: ${
+            
             data[dataTitleItem.label.toLowerCase()].lat
           },  long:${data[dataTitleItem.label.toLowerCase()].long}`}</StyledTd>
         ) : (
           <StyledTd key={i}>{data[dataTitleItem.label.toLowerCase()]}</StyledTd>
         )
       )}
-      <IconsEditDelette  id={data['id']} />
+      <IconsEditDelette  id={data['id']} resetOnDelete={resetOnDelete}/>
     </Tr> 
   );
 };

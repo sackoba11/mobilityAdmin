@@ -1,5 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  getFirestore,
+} from "firebase/firestore";
 import { app } from "../../firebase.config";
 import { Signal, signal } from "@preact/signals-react";
 import { Location, Station, StationToFirebase } from "../../interfaces/station";
@@ -10,10 +17,12 @@ const dbRefGbaka = collection(db, "GaresGbaka");
 const dbRefTaxi = collection(db, "GaresTaxi");
 let lastUpdateDate: Date | null = null;
 export const listStation: Signal<Station[]> = signal([]);
+
+
 export class StationDataState {
   static getListStation = async (): Promise<Station[]> => {
     const currentDate = new Date();
-    if (!lastUpdateDate || currentDate.getHours() > lastUpdateDate.getHours()) {
+    if (!lastUpdateDate || currentDate.getSeconds() > lastUpdateDate.getSeconds()) {
       try {
         const querySnapshotGbaka = await getDocs(dbRefGbaka);
         const querySnapshotTaxi = await getDocs(dbRefTaxi);
@@ -21,9 +30,8 @@ export class StationDataState {
         if (querySnapshotGbaka || querySnapshotTaxi) {
           listStation.value = [
             ...querySnapshotGbaka.docs.map((doc, index) => ({
-
               id: doc.id,
-              index:index,
+              index: index,
               libelle: doc.data().name,
               commune: doc.data().commune,
               type: doc.data().type,
@@ -35,18 +43,16 @@ export class StationDataState {
             ...listStation.value,
             ...querySnapshotTaxi.docs.map((doc, index) => ({
               id: doc.id,
-              index:index,
+              index: index,
               libelle: doc.data().name,
               commune: doc.data().commune,
               type: doc.data().type,
               localisation: doc.data().location,
             })),
           ];
-
-
         }
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
       lastUpdateDate = new Date();
     }
@@ -70,7 +76,7 @@ export class StationDataState {
       lat: lat.trim(),
       long: long.trim(),
     };
-   
+
     const dataStation: StationToFirebase = {
       name: data[1],
       commune: data[2],
@@ -92,12 +98,12 @@ export class StationDataState {
     }
   };
 
-  static deletteStation=async (IdStation:string):Promise<void>=>{
+  static deletteStation = async (idStation:string): Promise<void> => {
     try {
-   await   deleteDoc(doc(db,"listBus",IdStation))
-   alert("supprimer avec succes")
+      await deleteDoc(doc(db, "GaresTaxi", idStation));
+       this.getListStation()
     } catch (error) {
-      console.log(error)
+      console.log("erreur:",error);
     }
-  }
+  };
 }
