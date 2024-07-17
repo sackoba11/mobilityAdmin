@@ -43,7 +43,7 @@ export class StationDataState {
             ...listStation.value,
             ...querySnapshotTaxi.docs.map((doc, index) => ({
               id: doc.id,
-              index: index,
+              index: index + listStation.value.length,
               libelle: doc.data().name,
               commune: doc.data().commune,
               type: doc.data().type,
