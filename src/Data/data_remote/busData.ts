@@ -48,6 +48,7 @@ export class BusDataState {
   };
 
   static addBus = async (data: any): Promise<void> => {
+    //implementation de la recuperation des localisation d'itineraires des bus depuis le champ itineraire
     const dataBus: BusToFirebase = {
       number: data[1],
       source: data[2],

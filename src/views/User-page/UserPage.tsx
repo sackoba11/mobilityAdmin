@@ -61,7 +61,7 @@ const UserPage = () => {
                editImput={switchToEdit}
                data={listUsers}
                dataTitle={TableHeaderUsers}
-               resetOnDelete={reload}
+               restartPage={reload}
                deleteFunction={UsersDataState.deleteUser}
              />}
               </Await>

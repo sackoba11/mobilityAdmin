@@ -63,7 +63,7 @@ const Gares = () => {
                       submitImput={StationDataState.addStation}
                       editable={isEditable}
                       editImput={switchToEdit}
-                      resetOnDelete={reload}
+                      restartPage={reload}
                       deleteFunction={StationDataState.deleteStation}
                       data={listStation}
                       dataTitle={TableHeaderStation}

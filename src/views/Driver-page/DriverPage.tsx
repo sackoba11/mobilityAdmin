@@ -63,7 +63,7 @@ const DriverPage = () => {
                       editImput={switchToEdit}
                       data={listDriver}
                       dataTitle={TableheaderDriver}
-                      resetOnDelete={reload}
+                      restartPage={reload}
                       deleteFunction={DriversDataState.deleteDriver}
                     />
                   )}

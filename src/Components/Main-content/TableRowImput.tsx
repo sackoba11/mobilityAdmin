@@ -5,12 +5,12 @@ import { CloseIcon } from "@chakra-ui/icons";
 import AppColors from "../../Common/Theme/Colors";
 import { useEffect, useRef } from "react";
 
-
 type DataList = {
   dataTitle: TableHeaderBus[];
   submit: (data: any) => Promise<void>;
   editImput: () => void;
   nextId: number;
+  restartPage?:()=>void
 };
 
 export const TableRowImput = ({
@@ -18,23 +18,23 @@ export const TableRowImput = ({
   editImput,
   nextId,
   submit,
+  restartPage
 }: DataList) => {
   let dataList: string[] = [];
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const inputRefs = dataTitle.map(() => useRef<HTMLInputElement >(null));
-  
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  // const inputRefSelect = dataTitle.map(() => useRef<HTMLSelectElement>(null));
+  const inputRefs = dataTitle.map(() => useRef<HTMLInputElement>(null));
 
-  const SubmitData =async () => {
+  const SubmitData = async () => {
     dataList = [];
     inputRefs.forEach((element) => {
       const data = element.current!.value;
       dataList = [...dataList, data];
     });
-   await submit(dataList);
-   window.location.reload()
+    await submit(dataList);
+    editImput()
+    restartPage!()
+    // window.location.reload();
   };
 
   const handleSubmit = (
@@ -86,46 +86,16 @@ export const TableRowImput = ({
                   size="lg"
                 />
               ) : (
-                <>
-                  {column.label == "Type" ? (
-                    <>
-                      <Input
-                        w="80%"
-                        h={"40px"}
-                        ref={inputRefs[i]}
-                        onKeyDown={(e) => handleSubmit(e, i)}
-                        border={`1px solid ${AppColors.gray}`}
-                        name={"Type"}
-                        placeholder={"Type"}
-                        size="lg"
-                        marginRight={5}
-                      ></Input>
-                      {/* <Select w="110%"
-                        h={"40px"}
-                        ref={inputRefSelect[i]}
-                        onKeyDown={(e) => handleSubmit(e, i)}
-                        border={`1px solid ${AppColors.gray}`}
-                        name={"latitude"}
-                        
-                        size="lg"
-                        marginRight={5}>
-                        <option value="Gbaka">Gbaka</option>
-                        <option value="Taxi">Taxi</option>
-                      </Select> */}
-                    </>
-                  ) : (
-                    <Input
-                      w="80%"
-                      h={"40px"}
-                      ref={inputRefs[i]}
-                      onKeyDown={(e) => handleSubmit(e, i)}
-                      border={`1px solid ${AppColors.gray}`}
-                      name={column.label}
-                      placeholder={column.label}
-                      size="lg"
-                    />
-                  )}
-                </>
+                <Input
+                  w="80%"
+                  h={"40px"}
+                  ref={inputRefs[i]}
+                  onKeyDown={(e) => handleSubmit(e, i)}
+                  border={`1px solid ${AppColors.gray}`}
+                  name={column.label}
+                  placeholder={column.label}
+                  size="lg"
+                />
               )}
             </>
           )}
