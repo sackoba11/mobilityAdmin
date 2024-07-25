@@ -1,4 +1,4 @@
-import {  Table, TableContainer } from "@chakra-ui/react";
+import { Table, TableContainer } from "@chakra-ui/react";
 import { Bus, tableHeaderBus } from "../../interfaces/Bus";
 import {
   StyledTable,
@@ -18,8 +18,7 @@ export const busListPromise: Signal<Bus[]> = signal([]);
 
 const BusPage = () => {
   const [state, setState] = useState<boolean>(false);
-  busListPromise.value = BusDataState.loaderBus().data
-    .busListPromise as Bus[];
+  busListPromise.value = BusDataState.loaderBus().data.busListPromise as Bus[];
   const [isEditable, setSetEditable] = useState<boolean>(false);
   const switchToEdit = () => {
     setSetEditable(() => !isEditable);
@@ -31,7 +30,6 @@ const BusPage = () => {
   const getData = async () => {
     busListPromise.value = (await BusDataState.loaderBus().data
       .busListPromise) as Bus[];
-    console.log(busListPromise.value);
   };
 
   useEffect(() => {
@@ -51,22 +49,21 @@ const BusPage = () => {
         <TableContainer>
           <Table variant="striped" size="sm">
             <TableHeaderContent title={tableHeaderBus} />
-            <Suspense fallback={<StyledSkeleton title={tableHeaderBus}/>}>
+            <Suspense fallback={<StyledSkeleton title={tableHeaderBus} />}>
               <Await
                 resolve={busListPromise.value}
                 errorElement={<p>Erreur de chargement des données</p>}
               >
                 {(busList) => (
-                  <TableBody
-                  submitImput={BusDataState.addBus}
+                 busList? <TableBody
+                    submitImput={BusDataState.addBus}
                     editable={isEditable}
                     editImput={switchToEdit}
                     restartPage={reload}
                     deleteFunction={BusDataState.deleteBus}
                     data={busList}
                     dataTitle={tableHeaderBus}
-                  
-                  />
+                  />:<h1>Aucun Bus Disponible</h1>
                 )}
               </Await>
             </Suspense>

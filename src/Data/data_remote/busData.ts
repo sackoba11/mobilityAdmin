@@ -1,21 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { collection, deleteDoc, doc, getDocs, getFirestore } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  getFirestore,
+} from "firebase/firestore";
 import { app } from "../../firebase.config";
-import { Bus, BusToFirebase } from "../../interfaces/Bus";
+import { Bus, BusToFirebase, Itineraire } from "../../interfaces/Bus";
 import { Signal, signal } from "@preact/signals-react";
 import { defer } from "react-router-dom";
 
 const db = getFirestore(app);
-const RefDb = collection(db, "listBus")
+const RefDb = collection(db, "listBus");
 let lastUpdateDate: Date | null = null;
 export const listBus: Signal<Bus[]> = signal([]);
-// type DataBus={
-//   data:BusToFirebase
-// }
+
 export class BusDataState {
   static getListBus = async (): Promise<Bus[]> => {
     const currentDate = new Date();
-    if (!lastUpdateDate || currentDate.getSeconds() > lastUpdateDate.getSeconds()) {
+    if (
+      !lastUpdateDate ||
+      currentDate.getSeconds() > lastUpdateDate.getSeconds()
+    ) {
       try {
         const querySnapshot = await getDocs(RefDb);
         listBus.value = [];
@@ -23,7 +31,7 @@ export class BusDataState {
           listBus.value = [
             ...querySnapshot.docs.map((doc, index) => ({
               id: doc.id,
-              index:index,
+              index: index,
               numero: doc.data().number,
               source: doc.data().source,
               destination: doc.data().destination,
@@ -48,28 +56,42 @@ export class BusDataState {
   };
 
   static addBus = async (data: any): Promise<void> => {
-    //implementation de la recuperation des localisation d'itineraires des bus depuis le champ itineraire
+    let roadMap: Itineraire[] = [];
+    const firstSeach = ";";
+    const secondSearch = ",";
+    const location = data[4];
+    const locationSplitedFisrt = location.split(firstSeach);
+    for (let index = 0; index < locationSplitedFisrt.length; index++) {
+      const locationSplitedSecond =
+        locationSplitedFisrt[index].split(secondSearch);
+
+      const location: Itineraire = {
+        lat: locationSplitedSecond[0].trim(),
+        long: locationSplitedSecond[1].trim(),
+      };
+      roadMap = [...roadMap, location];
+    }
     const dataBus: BusToFirebase = {
       number: data[1],
       source: data[2],
       destination: data[3],
-      roadMap: [data[4]],
+      roadMap: roadMap,
       isActive: false,
     };
 
     try {
-      console.log(dataBus)
-      alert(dataBus.number);
+      const docref = await addDoc(RefDb, dataBus);
+      console.log(docref.id);
     } catch (error) {
       console.log(error);
     }
   };
 
-  static deleteBus = async (idBus:string): Promise<void> => {
+  static deleteBus = async (idBus: string): Promise<void> => {
     try {
       await deleteDoc(doc(db, "listBus", idBus));
     } catch (error) {
-      console.log("erreur:",error);
+      console.log("erreur:", error);
     }
   };
 }

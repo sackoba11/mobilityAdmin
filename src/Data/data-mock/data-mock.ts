@@ -56,7 +56,8 @@ export const getUsersData=()=>{
     const tableRow: AllUsers[] = [];
   for (let index = 0; index < 50; index++) {
     tableRow.push({
-      id: index,
+      id:"2",
+      index: index,
       email:"badra@hmail.com",
       nom:"Sacko ali"
     });
