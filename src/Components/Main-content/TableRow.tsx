@@ -10,8 +10,8 @@ type DataList = {
   index: number;
   resetOnDelete?:()=>void;
   deleteFunction?:(id:string)=>Promise<void>
-  editupdate: () => void;
-  update: boolean;
+  // editupdate: () => void;
+  // update: boolean;
 };
 
 
@@ -24,15 +24,15 @@ const StyledTd = styled.td`
   align-content: center;
   justify-content: center;
   `;
-  const StyledInput=styled.input`
+  // const StyledInput=styled.input`
   
-  `
+  // `
 
-export const TableRow = ({ dataTitle, data, index,resetOnDelete, deleteFunction ,update}: DataList) => {
+export const TableRow = ({ dataTitle, data, index,resetOnDelete, deleteFunction ,}: DataList) => {
 
  //implementation de la fonctionnalité e modification des données sur les infterfaces
   return (
-   <> {!update?<Tr key={index}>
+   <> {<Tr key={index}>
       {dataTitle.map((dataTitleItem, i) =>
         dataTitleItem.label.toLowerCase() == "itineraire" ? (
           <StyledTd key={i}>
@@ -70,43 +70,46 @@ export const TableRow = ({ dataTitle, data, index,resetOnDelete, deleteFunction 
         )
       )}
       <IconsEditDelette  id={data['id']} resetOnDelete={resetOnDelete} deleteFunction={deleteFunction}/>
-    </Tr>:<Tr>
-    {dataTitle.map((dataTitleItem, i) =>
-        dataTitleItem.label.toLowerCase() == "itineraire" ? (
-          <StyledInput key={i}>
-            {
-              // data[dataTitleItem.label.toLowerCase()].map(
+    </Tr>
+    // :
+    // <Tr>
+    // {dataTitle.map((dataTitleItem, i) =>
+    //     dataTitleItem.label.toLowerCase() == "itineraire" ? (
+    //       <StyledInput key={i}>
+    //         {
+    //           // data[dataTitleItem.label.toLowerCase()].map(
 
-              // (data: Itineraire, ind: number) => (
-              <span key={i} style={{ whiteSpace: "wrap" }}>
-                {`lat: ${
-                  data[dataTitleItem.label.toLowerCase()][0].lat
-                }, long: ${
-                  data[dataTitleItem.label.toLowerCase()][0].long
-                } ...   `}
-                {`lat: ${
-                  data[dataTitleItem.label.toLowerCase()][
-                    data[dataTitleItem.label.toLowerCase()].length - 1
-                  ].lat
-                }, long: ${
-                  data[dataTitleItem.label.toLowerCase()][
-                    data[dataTitleItem.label.toLowerCase()].length - 1 - 1
-                  ].long
-                }`}
-              </span>
-              // )
-              // )
-            }
-          </StyledInput>
-        ) : dataTitleItem.label.toLowerCase() == "localisation" ? (
-          <StyledInput key={i}>{`lat: ${
+    //           // (data: Itineraire, ind: number) => (
+    //           <span key={i} style={{ whiteSpace: "wrap" }}>
+    //             {`lat: ${
+    //               data[dataTitleItem.label.toLowerCase()][0].lat
+    //             }, long: ${
+    //               data[dataTitleItem.label.toLowerCase()][0].long
+    //             } ...   `}
+    //             {`lat: ${
+    //               data[dataTitleItem.label.toLowerCase()][
+    //                 data[dataTitleItem.label.toLowerCase()].length - 1
+    //               ].lat
+    //             }, long: ${
+    //               data[dataTitleItem.label.toLowerCase()][
+    //                 data[dataTitleItem.label.toLowerCase()].length - 1 - 1
+    //               ].long
+    //             }`}
+    //           </span>
+    //           // )
+    //           // )
+    //         }
+    //       </StyledInput>
+    //     ) : dataTitleItem.label.toLowerCase() == "localisation" ? (
+    //       <StyledInput key={i}>{`lat: ${
             
-            data[dataTitleItem.label.toLowerCase()].lat
-          },  long:${data[dataTitleItem.label.toLowerCase()].long}`}</StyledInput>
-        ) : (
-          <StyledInput key={i}>{data[dataTitleItem.label.toLowerCase()]}</StyledInput>
-        )
-      )}
-      </Tr>} </>
+    //         data[dataTitleItem.label.toLowerCase()].lat
+    //       },  long:${data[dataTitleItem.label.toLowerCase()].long}`}</StyledInput>
+    //     ) : (
+    //       <StyledInput key={i}>{data[dataTitleItem.label.toLowerCase()]}</StyledInput>
+    //     )
+    //   )}
+    //   </Tr>
+    } </>
   );
 };
