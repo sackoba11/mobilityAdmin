@@ -15,7 +15,7 @@ export const StyledTable = styled.div`
   padding: 15px;
   background-color: ${AppColors.white};
   overflow-y: scroll;
-  height: 80vh;
+  height: 80vh  ;
   border: 1px solid ${AppColors.gray};
   border-radius: 10px;
 `;

@@ -12,8 +12,8 @@ type DataList = {
   submitImput?: (data: any) => Promise<void>;
   editable: boolean;
   // update: boolean;
-  restartPage?:()=>void
-  deleteFunction?:(id:string)=>Promise<void>
+  restartPage?: () => void;
+  deleteFunction?: (id: string) => Promise<void>;
 };
 
 export const TableBody = ({
@@ -24,16 +24,15 @@ export const TableBody = ({
   submitImput,
   restartPage,
   deleteFunction,
-  // update,
-  // editupdate
-}: DataList) => {
-  
+}: // update,
+// editupdate
+DataList) => {
   return (
     <Tbody>
-      {data.map((dataItem: never, index: number) => 
-      <TableRow
-      // editupdate={editupdate}
-      // update={update}
+      {data.map((dataItem: never, index: number) => (
+        <TableRow
+          // editupdate={editupdate}
+          // update={update}
           key={index}
           data={dataItem}
           dataTitle={dataTitle}
@@ -41,7 +40,7 @@ export const TableBody = ({
           resetOnDelete={restartPage}
           deleteFunction={deleteFunction}
         />
-      )}
+      ))}
       {editable ? (
         <TableRowImput
           nextId={data.length}
@@ -49,7 +48,6 @@ export const TableBody = ({
           editImput={editImput}
           dataTitle={dataTitle}
           restartPage={restartPage}
-
         />
       ) : (
         <></>
