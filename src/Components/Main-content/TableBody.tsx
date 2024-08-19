@@ -8,11 +8,10 @@ type DataList = {
   dataTitle: TableHeaderBus[];
   data: any;
   editImput: () => void;
-  // editupdate: () => void;
   submitImput?: (data: any) => Promise<void>;
   editable: boolean;
-  // update: boolean;
   restartPage?: () => void;
+  updateFunction?: (id: string) => Promise<void>;
   deleteFunction?: (id: string) => Promise<void>;
 };
 
@@ -24,8 +23,7 @@ export const TableBody = ({
   submitImput,
   restartPage,
   deleteFunction,
-}: // update,
-// editupdate
+}: 
 DataList) => {
   return (
     <Tbody>

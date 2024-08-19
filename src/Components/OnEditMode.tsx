@@ -2,7 +2,6 @@ import { CloseIcon } from "@chakra-ui/icons";
 import { Button } from "@chakra-ui/react";
 import AppColors from "../Common/Theme/Colors";
 import { BiSave } from "react-icons/bi";
-import { BsSave, BsSave2, BsSave2Fill } from "react-icons/bs";
 type Data = {
   resetOnDelete: () => void;
   setEdit: (value: boolean) => void;

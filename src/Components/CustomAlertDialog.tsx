@@ -75,7 +75,7 @@ export const CustomAlertDialog = ({ id, resetOnDelete, deleteFunction }: Data) =
               </AlertDialogHeader>
 
               <AlertDialogBody>
-                Êtes-vous sûr de vouloir supprimer cette gare ?
+                Êtes-vous sûr de vouloir le  supprimer ?
               </AlertDialogBody>
 
               <AlertDialogFooter>

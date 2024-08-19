@@ -27,7 +27,7 @@ export const IconsEditDelette = ({
         }}
         onClick={() => {
           setEdit!(false);
-          resetOnDelete!();
+          // resetOnDelete!();
         }}
       />
       <CustomAlertDialog

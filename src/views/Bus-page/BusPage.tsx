@@ -20,13 +20,9 @@ const BusPage = () => {
   const [state, setState] = useState<boolean>(false);
   busListPromise.value = BusDataState.loaderBus().data.busListPromise as Bus[];
   const [isEditable, setSetEditable] = useState<boolean>(false);
-  // const [update, setUpdate] = useState<boolean>(false);
   const switchToEdit = () => {
     setSetEditable(() => !isEditable);
   };
-  // const switchToUpdate = () => {
-  //   setUpdate(() => !update);
-  // };
 
   const reload = () => {
     setState(() => !state);
