@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {
+  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -8,6 +9,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { app } from "../../firebase.config";
 import { Driver, DriverToFirebase } from "../../interfaces/Driver";
 import { Signal, signal } from "@preact/signals-react";
@@ -53,15 +55,24 @@ export class DriversDataState {
   };
 
   static addDriver = async (data: any): Promise<void> => {
+    
+    try {
+
+    const auth = getAuth();
+    const userCredential=await  createUserWithEmailAndPassword(auth, data[2], "Password2023");
+      
+    const user = userCredential.user;
+    const uid=user.uid;
+
     const dataDriver: DriverToFirebase = {
+      uid:uid,
       name: data[1],
       email: data[2],
       isDriver: true,
     };
-
-    try {
-      console.log(dataDriver);
-      alert(dataDriver.name);
+ 
+      const docref=await addDoc(refDb,dataDriver);
+      console.log(docref.id);
     } catch (error) {
       console.log(error);
     }

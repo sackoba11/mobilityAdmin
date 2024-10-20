@@ -6,6 +6,7 @@ export type Driver = {
   };
 
   export type DriverToFirebase={
+    uid:string;
     name:string;
     email:string;
     isDriver:boolean

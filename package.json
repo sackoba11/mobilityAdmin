@@ -21,6 +21,7 @@
     "firebase": "^10.12.2",
     "firebase-tools": "^13.10.2",
     "framer-motion": "^11.2.6",
+    "mobilityadmin": "file:",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.2.1",
